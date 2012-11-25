@@ -33,7 +33,7 @@ class Pazdra
     doc = REXML::Document.new raw_xml
     guerrillas = {}
     doc.elements.each('/root/item') do |element|
-      hours = element.get_text('hour').to_s.split('&lt;br&gt;')
+      hours = element.get_text('hour').to_s.gsub(/&lt;.*?&gt;/, ' ').split(' ')
       guerrillas[element.get_text('group').to_s] = {
         :day => element.get_text('day').to_s,
         :type => element.get_text('type').to_s,
